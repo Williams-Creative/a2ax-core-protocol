@@ -55,6 +55,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install protocol dependencies
+        run: npm ci
+        working-directory: protocol
+
       - name: Build
         run: npm run build
 
