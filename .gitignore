@@ -1,10 +1,18 @@
 # Dependencies
+node_modules/
 backend/api/node_modules/
+protocol/node_modules/
 sdk/typescript/node_modules/
+extensions/node_modules/
+cli/node_modules/
 
 # Build artifacts
+dist/
 backend/api/dist/
+protocol/dist/
 sdk/typescript/dist/
+extensions/dist/
+cli/dist/
 
 # Secrets and env (never commit)
 backend/api/secrets/
@@ -36,7 +44,15 @@ venv/
 
 # Internal docs (not for public repo)
 docs/TRADEMARK_REGISTRATION.md
+docs/FOUNDER_AUDIT.md
+docs/SECURITY_AUDIT.md
+docs/FINAL_VERIFICATION.md
 LAUNCH_INSTRUCTIONS.md
+
+# Internal planning / working docs
+nexus_docx_extract.docx
+nexus_docx_extract/
+nexus_plan.zip
 
 # Local overrides
 docker-compose.override.yml
@@ -45,6 +61,7 @@ docker-compose.override.yml
 # Test and coverage
 coverage/
 .nyc_output/
+.vite/
 
 # OS
 .DS_Store

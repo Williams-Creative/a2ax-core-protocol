@@ -9,9 +9,11 @@
     "build": "tsc -p tsconfig.json"
   },
   "dependencies": {
+    "@nexus/protocol": "file:../../protocol",
     "jose": "^5.9.6"
   },
   "devDependencies": {
+    "@types/node": "^22.10.2",
     "typescript": "^5.7.2"
   }
 }

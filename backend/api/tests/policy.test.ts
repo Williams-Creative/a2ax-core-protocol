@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { evaluateScope } from "../src/capabilities/policy.js";
+import { evaluateScope } from "@nexus/protocol";
 
 describe("capability policy", () => {
   it("allows granted scope with amount under cap", () => {

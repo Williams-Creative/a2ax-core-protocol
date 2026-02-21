@@ -1,5 +1,6 @@
 import { createHash, randomUUID } from "node:crypto";
 import { exportJWK, generateKeyPair, importJWK, SignJWT, type JWK, type KeyLike } from "jose";
+import { PROTOCOL_VERSION } from "@nexus/protocol";
 
 export type SignedRequestInput = {
   agentId: string;
@@ -25,7 +26,7 @@ export async function signAgentRequest(
   privateJwk: JWK,
   input: SignedRequestInput
 ): Promise<{ token: string; nonce: string; timestamp: number }> {
-  const key: KeyLike = await importJWK(privateJwk, "EdDSA");
+  const key = (await importJWK(privateJwk, "EdDSA")) as KeyLike;
   const nonce = randomUUID();
   const timestamp = Date.now();
   const token = await new SignJWT({
@@ -33,6 +34,7 @@ export async function signAgentRequest(
     scope: input.scope,
     nonce,
     ts: timestamp,
+    protocol_version: PROTOCOL_VERSION,
     method: input.method.toUpperCase(),
     path: input.path,
     body_hash: hashBody(input.body)
@@ -50,13 +52,14 @@ export async function buildHandshakeRequest(
   requestedScopes: string[],
   sessionTtlSeconds = 300
 ): Promise<{ token: string; nonce: string; timestamp: number }> {
-  const key: KeyLike = await importJWK(privateJwk, "EdDSA");
+  const key = (await importJWK(privateJwk, "EdDSA")) as KeyLike;
   const nonce = randomUUID();
   const timestamp = Date.now();
   const token = await new SignJWT({
     agent_id: agentId,
     nonce,
     ts: timestamp,
+    protocol_version: PROTOCOL_VERSION,
     requested_scopes: requestedScopes,
     session_ttl_s: sessionTtlSeconds
   })

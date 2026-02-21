@@ -1,0 +1,21 @@
+{
+  "name": "@nexus/extensions",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./interfaces/index.ts",
+      "import": "./interfaces/index.ts",
+      "default": "./interfaces/index.ts"
+    },
+    "./examples": {
+      "types": "./examples/index.ts",
+      "import": "./examples/index.ts",
+      "default": "./examples/index.ts"
+    }
+  },
+  "dependencies": {
+    "@nexus/protocol": "file:../protocol"
+  }
+}

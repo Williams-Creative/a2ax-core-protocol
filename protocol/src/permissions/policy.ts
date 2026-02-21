@@ -1,4 +1,16 @@
-import type { CapabilityManifest } from "../types.js";
+export type CapabilityManifest = {
+  scopes: Array<{
+    name: string;
+    max_amount_cents?: number;
+    resources?: string[];
+    operations?: string[];
+  }>;
+  limits?: {
+    rate_per_minute?: number;
+    concurrency?: number;
+  };
+  restricted_operations?: string[];
+};
 
 type ScopeCheckInput = {
   requestedScope: string;

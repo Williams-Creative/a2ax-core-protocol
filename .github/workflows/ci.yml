@@ -7,7 +7,36 @@ on:
     branches: [main, develop]
 
 jobs:
+  protocol-isolation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: protocol/package-lock.json
+
+      - name: Install protocol dependencies
+        run: npm ci
+        working-directory: protocol
+
+      - name: Build protocol
+        run: npm run build
+        working-directory: protocol
+
+      - name: Run protocol tests
+        run: npm test
+        working-directory: protocol
+
+      - name: Lint protocol imports
+        run: npm run lint:imports
+        working-directory: protocol
+
   build-and-test:
+    needs: protocol-isolation
     runs-on: ubuntu-latest
     defaults:
       run:

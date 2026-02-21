@@ -2,10 +2,26 @@
 
 **N**etwork for **E**xchange and **T**rust **U**nified by **S**ignatures
 
-A centralized, open-source Agent Identity & Trust Layer for secure AI-to-AI (A2A) economic interaction. NEXUS provides verifiable identity, cryptographic verification, capability-scoped permissions, and trust scoring for autonomous agents.
+**Nexus is the open trust standard and identity layer for autonomous economic systems.** It provides verifiable identity, cryptographic verification, capability-scoped permissions, and trust scoring for AI-to-AI (A2A) interaction—enabling agents to transact, attest, and collaborate with confidence.
 
 > *The agent economy will not fail due to lack of intelligence. It will fail due to lack of trust.*  
-> NEXUS is the foundational infrastructure for agent-native identity and trust.
+> Nexus is the foundational infrastructure for agent-native identity and trust.
+
+**This protocol does not require Nexus-operated infrastructure to function.** You can fork, self-host, and run verification independently.
+
+**Nexus defines verification mechanics. Trust policy is verifier-controlled.** No embedded trust anchors; trust store ships empty.
+
+---
+
+## Architecture: Three Layers
+
+| Layer | Scope | Contents |
+|-------|-------|----------|
+| **Layer 1 – Open Trust Protocol** (this repo) | Core trust logic | Identity, Attestations, Events, Verification, Handshake |
+| **Layer 2 – Optional Extensions** | Pluggable contracts | Risk scoring, Escrow, Compliance (interfaces only) |
+| **Layer 3 – Commercial Services** (not in repo) | Hosted offerings | Managed trust graph, Enterprise dashboards, Economic network services |
+
+The protocol (`/protocol`) compiles and runs in isolation. Extensions and commercial services are optional.
 
 ---
 
@@ -13,7 +29,8 @@ A centralized, open-source Agent Identity & Trust Layer for secure AI-to-AI (A2A
 
 - **Agent Identity Issuance** — Unique agent IDs, signed certificates, capability manifests
 - **Cryptographic Verification** — Ed25519 signatures, nonce replay protection, timestamp validation
-- **Trust Scoring** — Rule-based trust engine with success/failure/SLA inputs
+- **Portable Certificates** — Verify without registry; trust store + policy engine
+- **Trust Scoring** — Rule-based trust engine (extensible via TrustScoring interface)
 - **Capability Declaration** — Scope-based permissions with amount limits and restricted operations
 - **A2A Handshake** — Secure session establishment between agents
 - **Audit & Compliance** — Append-only audit logs, correlation IDs, filtered export
@@ -66,11 +83,16 @@ docker compose -f infra/docker-compose.yml up --build
 
 ```
 nexus-protocol/
-├── backend/api/          # API server (Fastify, TypeScript)
+├── protocol/             # Core trust logic (certificate, identity, crypto, handshake, permissions, trust store, policy)
+├── config/               # defaultPolicy.yaml, trust/anchors/
+├── bundles/              # Optional trust bundles (community, enterprise)
+├── cli/                  # nexus trust install
 ├── sdk/typescript/       # TypeScript SDK
 ├── sdk/python/           # Python SDK
+├── extensions/           # Optional interfaces (TrustScoring, Escrow, Compliance) + examples
+├── backend/api/          # HTTP server (depends on protocol)
 ├── infra/                # Docker Compose, Prometheus alerts
-└── docs/                 # API, crypto, handshake, threat model
+└── docs/                 # API, trust model, portable certs, federation, governance
 ```
 
 ---
@@ -80,11 +102,21 @@ nexus-protocol/
 | Document | Description |
 |----------|-------------|
 | [API Specification](docs/api.md) | REST endpoints and auth |
+| [Architecture](docs/architecture.md) | Layered model, data flow, fork scenario |
+| [Trust Model](docs/trust-model.md) | Verifier-controlled trust, no embedded anchors |
+| [Portable Certificates](docs/portable-certificates.md) | Verify without registry |
+| [Trust Bundles](docs/trust-bundles.md) | Installable issuer keys |
+| [Federation Roadmap](docs/federation-roadmap.md) | Cross-registry trust (future) |
+| [Governance](docs/governance.md) | Contribution, versioning, neutrality |
+| [Governance Philosophy](docs/governance-philosophy.md) | What Nexus is and is not |
 | [Cryptographic Flow](docs/crypto.md) | Ed25519, JWT, verification flow |
 | [Handshake Protocol](docs/handshake.md) | A2A session establishment |
+| [Security](docs/security.md) | Revocation, key rotation |
 | [Threat Model](docs/threat-model.md) | Security and mitigations |
 | [Deployment & Pilot](docs/deployment-and-pilot.md) | Rollout, rollback, SLOs |
-| [Enterprise Onboarding](docs/enterprise-onboarding.md) | Compliance and onboarding |
+| [Production Hardening](docs/production-hardening.md) | KMS, secrets, TLS, audit archiving |
+| [Enterprise Onboarding](docs/enterprise-onboarding.md) | Optional commercial onboarding |
+| [Versioning](VERSION.md) | Semantic versioning, compatibility rules |
 
 ---
 
@@ -97,7 +129,7 @@ nexus-protocol/
 
 ## License
 
-MIT License — see [LICENSE](LICENSE). Copyright (c) 2025 Williams Creative.
+MIT License — see [LICENSE](LICENSE). Copyright (c) 2026 Williams Creative.
 
 **Trademark:** NEXUS and NEXUS Protocol are trademarks of Williams Creative. Use of the NEXUS name or branding in a manner that implies endorsement or causes confusion is not permitted. See [TRADEMARK.md](TRADEMARK.md) for details.
 
@@ -107,7 +139,7 @@ MIT License — see [LICENSE](LICENSE). Copyright (c) 2025 Williams Creative.
 
 | Open (this repo) | Closed (Williams Creative offerings) |
 |------------------|--------------------------------------|
-| API server, SDKs, protocol | Managed hosting, enterprise dashboards |
+| Protocol, API server, SDKs | Managed hosting, enterprise dashboards |
 | Identity, verification, trust, handshake | Escrow, conditional transactions (Phase 2) |
 | Self-host deployment | Compliance UI, usage analytics |
 

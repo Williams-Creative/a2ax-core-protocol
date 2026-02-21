@@ -19,7 +19,8 @@ const envSchema = z
     ADMIN_API_KEY: z.string().min(16),
     ADMIN_JWT_TTL_SECONDS: z.coerce.number().int().positive().default(900),
     RATE_LIMIT_PER_MINUTE: z.coerce.number().int().positive().default(120),
-    NODE_ENV: z.enum(["development", "test", "production"]).default("development")
+    NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
+    TRUST_ANCHORS_DIR: z.string().optional()
   })
   .refine(
     (data) =>
@@ -49,5 +50,6 @@ export const config = {
   adminApiKey: env.ADMIN_API_KEY,
   adminJwtTtlSeconds: env.ADMIN_JWT_TTL_SECONDS,
   rateLimitPerMinute: env.RATE_LIMIT_PER_MINUTE,
-  nodeEnv: env.NODE_ENV
+  nodeEnv: env.NODE_ENV,
+  trustAnchorsDir: env.TRUST_ANCHORS_DIR
 };

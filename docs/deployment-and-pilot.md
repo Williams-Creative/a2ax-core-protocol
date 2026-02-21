@@ -39,10 +39,14 @@ Create `.env` at project root (copy from `.env.example`) and set `ADMIN_API_KEY`
 - JWT authenticates admin endpoints.
 
 ## 7) Production hardening before public rollout
-- Replace file-based issuer signing with managed KMS/HSM.
-- Move admin key to secret manager and rotate regularly.
-- Enable TLS termination with strict transport settings.
-- Add centralized metrics/alerts and immutable audit archiving.
+
+See **[docs/production-hardening.md](production-hardening.md)** for detailed guidance:
+
+- **KMS**: Replace file-based issuer signing with AWS KMS (or HSM). Set `KMS_KEY_ARN` and `AWS_REGION`.
+- **Secrets**: Store `ADMIN_API_KEY` in a secret manager (e.g. AWS Secrets Manager); rotate regularly.
+- **TLS**: Enable TLS termination at load balancer or reverse proxy; use HSTS and TLS 1.2+.
+- **Audit archiving**: Archive audit logs to immutable storage (e.g. S3 Object Lock, CloudWatch Logs).
+- **Metrics/alerts**: Use `GET /metrics` and `infra/prometheus-alerts.yml` for centralized monitoring.
 
 ---
 

@@ -1,21 +1,26 @@
-import { createHash, randomUUID } from "node:crypto";
+import { randomUUID } from "node:crypto";
 import type { FastifyInstance } from "fastify";
 import type { JWK } from "jose";
 import { z } from "zod";
 import { issueAdminToken, verifyAdminAuth } from "../auth/admin.js";
 import { writeAuditLog } from "../audit/logger.js";
-import { capabilityManifestSchema } from "../capabilities/schema.js";
-import { evaluateScope } from "../capabilities/policy.js";
+import {
+  capabilityManifestSchema,
+  checkProtocolVersion,
+  evaluateScope,
+  verifyPortableCertificate,
+  type CapabilityManifest
+} from "@nexus/protocol";
 import { config } from "../config.js";
-import { signCertificate, verifyAgentJwt } from "../crypto/signing.js";
+import { hashJsonBody, signCertificate, verifyAgentJwt } from "../crypto/signing.js";
 import { query } from "../db/postgres.js";
 import { redis } from "../db/redis.js";
 import { metrics as promMetrics } from "../metrics/index.js";
 import { computeTrustScore } from "../trust/engine.js";
-import type { CapabilityManifest } from "../types.js";
+import { getTrustStore } from "../trust-store.js";
 
 function manifestHash(manifest: CapabilityManifest): string {
-  return createHash("sha256").update(JSON.stringify(manifest)).digest("hex");
+  return hashJsonBody(manifest);
 }
 
 type AgentRecord = {
@@ -245,6 +250,70 @@ export async function registerRoutes(app: FastifyInstance): Promise<void> {
     return manifest;
   });
 
+  app.post("/verify/portable", async (request, reply) => {
+    const subject = (request.headers["x-agent-id"]?.toString() ?? request.ip).toString();
+    if (!(await enforceRateLimit(subject, "verify_portable"))) {
+      return reply.code(429).send({ valid: false, reason: "rate_limited" });
+    }
+    const input = z
+      .object({
+        certificate_jws: z.string(),
+        revocation_status: z.enum(["active", "revoked"]).optional(),
+        require_revocation_check: z.boolean().optional()
+      })
+      .parse(request.body);
+
+    const store = getTrustStore();
+    const issuerId = (() => {
+      try {
+        const parts = input.certificate_jws.split(".");
+        const payload = JSON.parse(Buffer.from(parts[1], "base64url").toString());
+        return payload.iss ?? payload.issuer_id;
+      } catch {
+        return null;
+      }
+    })();
+
+    if (!issuerId || !store.isTrusted(issuerId)) {
+      return reply.code(403).send({ valid: false, reason: "issuer_not_trusted" });
+    }
+
+    const issuerKey = store.getIssuerPublicKey(issuerId);
+    if (!issuerKey) {
+      return reply.code(403).send({ valid: false, reason: "issuer_not_trusted" });
+    }
+
+    const result = await verifyPortableCertificate({
+      certificateJws: input.certificate_jws,
+      issuerPublicKey: issuerKey,
+      revocationStatus: input.revocation_status,
+      requireRevocationCheck: input.require_revocation_check
+    });
+
+    if (!result.valid) {
+      return reply.code(401).send({ valid: false, reason: result.reason });
+    }
+
+    return reply.send({ valid: true, payload: result.payload });
+  });
+
+  app.get("/issuer/:issuerId", async (request, reply) => {
+    const { issuerId } = z.object({ issuerId: z.string() }).parse(request.params);
+    const store = getTrustStore();
+    if (!store.isTrusted(issuerId)) {
+      return reply.code(404).send({ error: "issuer_not_found" });
+    }
+    const key = store.getIssuerPublicKey(issuerId);
+    if (!key) return reply.code(404).send({ error: "issuer_not_found" });
+    const issuers = store.listIssuers();
+    const meta = issuers.find((i) => i.issuerId === issuerId)?.metadata;
+    return reply.send({
+      issuer_id: issuerId,
+      public_key: key,
+      metadata: meta ?? {}
+    });
+  });
+
   app.post("/verify", async (request, reply) => {
     const subject = (request.headers["x-agent-id"]?.toString() ?? request.ip).toString();
     if (!(await enforceRateLimit(subject, "verify"))) {
@@ -301,6 +370,13 @@ export async function registerRoutes(app: FastifyInstance): Promise<void> {
     }
 
     const payload = await verifyAgentJwt(input.token, publicJwk);
+    const clientVersion = (payload.protocol_version as string) ?? "0.0.0";
+    const versionCheck = checkProtocolVersion(clientVersion);
+    if (!versionCheck.compatible) {
+      promMetrics.verifyTotal.inc({ result: "failure", reason: "protocol_version_mismatch" });
+      promMetrics.verifyDuration.observe({ result: "failure" }, (Date.now() - verifyStart) / 1000);
+      return reply.code(400).send({ valid: false, reason: versionCheck.reason });
+    }
     if (
       payload.agent_id !== input.agent_id ||
       payload.scope !== input.scope ||
@@ -488,6 +564,12 @@ export async function registerRoutes(app: FastifyInstance): Promise<void> {
       return reply.code(404).send({ valid: false, reason: "public_key_missing" });
     }
     const payload = await verifyAgentJwt(input.handshake_req_jws, jwk);
+    const clientVersion = (payload.protocol_version as string) ?? "0.0.0";
+    const versionCheck = checkProtocolVersion(clientVersion);
+    if (!versionCheck.compatible) {
+      promMetrics.handshakeVerifyTotal.inc({ result: "failure" });
+      return reply.code(400).send({ valid: false, reason: versionCheck.reason });
+    }
     const withinSkew = Math.abs(Date.now() - input.timestamp) <= config.timestampSkewMs;
     const sameScopes =
       Array.isArray(payload.requested_scopes) &&

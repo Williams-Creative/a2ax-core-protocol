@@ -3,6 +3,7 @@
  * Requires: docker compose -f infra/docker-compose.yml up -d
  * Run: npm run test:integration
  */
+import { PROTOCOL_VERSION } from "@nexus/protocol";
 import { generateKeyPair, exportJWK, importJWK, SignJWT } from "jose";
 import { describe, expect, it, beforeAll } from "vitest";
 
@@ -94,7 +95,8 @@ describe("integration: API workflows", () => {
       agent_id: agentId,
       scope: "data_access",
       nonce,
-      ts: timestamp
+      ts: timestamp,
+      protocol_version: PROTOCOL_VERSION
     })
       .setProtectedHeader({ alg: "EdDSA", typ: "JWT" })
       .setIssuedAt()
@@ -124,7 +126,8 @@ describe("integration: API workflows", () => {
       agent_id: agentId,
       scope: "data_access",
       nonce,
-      ts: timestamp
+      ts: timestamp,
+      protocol_version: PROTOCOL_VERSION
     })
       .setProtectedHeader({ alg: "EdDSA", typ: "JWT" })
       .setIssuedAt()
@@ -164,6 +167,7 @@ describe("integration: API workflows", () => {
       agent_id: agentId,
       nonce,
       ts: timestamp,
+      protocol_version: PROTOCOL_VERSION,
       requested_scopes: requestedScopes,
       session_ttl_s: 300
     })

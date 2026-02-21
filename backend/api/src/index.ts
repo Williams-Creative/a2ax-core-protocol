@@ -3,9 +3,13 @@ import { config } from "./config.js";
 import { runMigrations } from "./db/migrate.js";
 import { pool } from "./db/postgres.js";
 import { redis } from "./db/redis.js";
+import { loadTrustAnchors } from "./trust-store.js";
 
 async function main(): Promise<void> {
   await runMigrations();
+  if (config.trustAnchorsDir) {
+    await loadTrustAnchors(config.trustAnchorsDir);
+  }
   const app = buildApp();
   await app.listen({ host: config.host, port: config.port });
 

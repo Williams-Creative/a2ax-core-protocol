@@ -1,0 +1,3 @@
+# Place issuer public keys (*.pem or *.json) here.
+# Trust store loads from this directory.
+# Empty by default. No embedded trust anchors.

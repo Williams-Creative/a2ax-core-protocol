@@ -1,0 +1,11 @@
+# Repo root .dockerignore (build context is repo root)
+node_modules
+.git
+*.log
+.env
+.env.*
+!.env.example
+dist
+*.md
+.cursor
+agent-transcripts

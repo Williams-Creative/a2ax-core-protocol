@@ -22,6 +22,7 @@ export function buildApp() {
     reply.header("x-request-id", requestId);
   });
 
+  app.get("/health", async () => ({ ok: true }));
   app.get("/healthz", async () => ({ ok: true }));
   app.get("/readyz", async (request, reply) => {
     try {

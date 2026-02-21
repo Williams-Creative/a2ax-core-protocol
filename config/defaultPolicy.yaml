@@ -1,0 +1,7 @@
+# Nexus default policy template.
+# Trust policy is verifier-controlled. Copy and customize.
+# No embedded trust anchors.
+
+minimum_assurance_level: 0
+allowed_jurisdictions: []
+require_revocation_check: false
