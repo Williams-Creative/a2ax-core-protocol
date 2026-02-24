@@ -1,6 +1,6 @@
 # A2AX Protocol Roadmap
 
-Public roadmap for the A2AX Protocol. Scope is neutral; no commercial tier details.
+Roadmap for the A2AX open trust protocol. Scope is neutral; no commercial tier details.
 
 ## Near-term
 

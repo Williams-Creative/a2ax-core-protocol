@@ -4,6 +4,20 @@ All notable changes to the A2AX Protocol are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.1.1] - 2026-02-24
+
+### Changed
+
+- Documentation alignment: README, governance, manifesto, specification, architecture, handshake, enterprise-onboarding, roadmap, governance-philosophy
+- Aligned design principles (5-principle set) across specification and docs
+- Expanded "What A2AX Is Not" in governance-philosophy
+- Layer 3 wording: "Services (Future)" in architecture diagram
+- Handshake: Registry → Server/Verifier; added verifier-controlled note
+- CONTRIBUTING: Protocol Changes subsection with neutrality guidance
+- Enterprise onboarding: neutrality intro; roadmap: open trust protocol intro
+
+---
+
 ## [0.1.0] - 2026-02-23
 
 ### Added

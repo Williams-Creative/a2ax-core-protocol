@@ -3,58 +3,113 @@
 [![CI](https://github.com/Williams-Creative/a2ax-protocol/actions/workflows/ci.yml/badge.svg)](https://github.com/Williams-Creative/a2ax-protocol/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**A**gent **t**o **A**gent **E**xchange
-
-**A2AX is the open trust standard and identity layer for autonomous economic systems.** It provides verifiable identity, cryptographic verification, capability-scoped permissions, and trust scoring for AI-to-AI (A2A) interaction—enabling agents to transact, attest, and collaborate with confidence.
-
-> *The agent economy will not fail due to lack of intelligence. It will fail due to lack of trust.*  
-> A2AX is the foundational infrastructure for agent-native identity and trust.
-
-**This protocol does not require A2AX-operated infrastructure to function.** You can fork, self-host, and run verification independently.
-
-**A2AX defines verification mechanics. Trust policy is verifier-controlled.** No embedded trust anchors; trust store ships empty.
+**A**gent-to-**A**gent E**x**change
 
 ---
 
-## Architecture: Three Layers
+# Open Trust Infrastructure for Autonomous Agents
 
-| Layer | Scope | Contents |
-|-------|-------|----------|
-| **Layer 1 – A2AX Protocol** (this repo) | Core trust logic | Identity, Attestations, Events, Verification, Handshake |
-| **Layer 2 – Optional Extensions** | Pluggable contracts | Risk scoring, Escrow, Compliance (interfaces only) |
-| **Layer 3 – Commercial Services** (not in repo) | Hosted offerings | Managed trust graph, Enterprise dashboards, Economic network services |
+**A2AX is an open, neutral trust protocol and identity layer for autonomous economic systems.**
 
-The protocol (`/protocol`) compiles and runs in isolation. Extensions and commercial services are optional.
+It provides:
+
+* Cryptographic identity
+* Portable verification
+* Capability-scoped permissions
+* Verifier-controlled trust policy
+* Secure A2A handshake primitives
+
+A2AX enables agents to transact, attest, and collaborate **without centralized registries, embedded trust anchors, or platform lock-in.**
+
+> *The agent economy will not fail due to lack of intelligence. It will fail due to lack of trust.*
+> A2AX is designed to prevent that failure.
+
+**This protocol does not require A2AX-operated infrastructure to function.**
+You can fork, self-host, and run verification independently.
+
+**A2AX defines verification mechanics. Trust policy is verifier-controlled.**
+The trust store ships empty.
 
 ---
 
-## Features
+# Design Principles
 
-- **Agent Identity Issuance** — Unique agent IDs, signed certificates, capability manifests
-- **Cryptographic Verification** — Ed25519 signatures, nonce replay protection, timestamp validation
-- **Portable Certificates** — Verify without registry; trust store + policy engine
-- **Trust Scoring** — Rule-based trust engine (extensible via TrustScoring interface)
-- **Capability Declaration** — Scope-based permissions with amount limits and restricted operations
-- **A2A Handshake** — Secure session establishment between agents
-- **Audit & Compliance** — Append-only audit logs, correlation IDs, filtered export
+A2AX is built on five foundational principles:
+
+### 1. Neutrality
+
+No mandatory trust anchors.
+No embedded registries.
+No centralized authorities.
+
+Verification policy is entirely verifier-controlled.
+
+### 2. Portability
+
+Certificates are self-contained and cryptographically verifiable without a live registry lookup.
+
+### 3. Explicit Capability Scoping
+
+Agents declare capabilities with scoped permissions and optional limits.
+Trust decisions are contextual — not binary.
+
+### 4. Cryptographic Integrity
+
+All identity artifacts are signed using modern cryptography (Ed25519), with replay protection and timestamp validation.
+
+### 5. Extensibility
+
+Trust scoring, compliance logic, and economic extensions are pluggable via defined interfaces — not hardcoded into the protocol core.
 
 ---
 
-## Quick Start
+# Architecture: Three Layers
 
-### Prerequisites
+| Layer                                   | Scope                        | Contents                                                                    |
+| --------------------------------------- | ---------------------------- | --------------------------------------------------------------------------- |
+| **Layer 1 – A2AX Protocol** (this repo) | Core trust primitives        | Identity, Certificates, Verification, Trust Store, Policy Engine, Handshake |
+| **Layer 2 – Optional Extensions**       | Pluggable modules            | Risk scoring, Escrow, Compliance (interfaces only)                          |
+| **Layer 3 – Services (Future)**         | Hosted or ecosystem services | Managed trust graph, dashboards, analytics, economic services               |
 
-- Docker and Docker Compose
-- Node.js 18+
+The protocol compiles and runs in isolation.
+Extensions are optional.
+Services are not required.
 
-### 1. Clone and setup
+The core remains open, neutral, and self-hostable.
+
+---
+
+# Core Capabilities
+
+* **Agent Identity Issuance** — Unique agent IDs, signed certificates, capability manifests
+* **Cryptographic Verification** — Ed25519 signatures, nonce replay protection, timestamp validation
+* **Portable Certificates** — Verify without registry; independent trust store configuration
+* **Trust Scoring Engine** — Rule-based trust evaluation (extensible via interface)
+* **Capability Declaration** — Scope-based permissions with optional quantitative limits
+* **A2A Handshake Protocol** — Secure session establishment between agents
+* **Audit & Compliance** — Append-only audit logs, correlation IDs, filtered export
+
+---
+
+# Quick Start
+
+## Prerequisites
+
+* Docker and Docker Compose
+* Node.js 18+
+
+---
+
+## 1. Clone and Setup
 
 ```bash
 git clone https://github.com/Williams-Creative/a2ax-protocol.git
 cd a2ax-protocol
 ```
 
-### 2. Provision secrets
+---
+
+## 2. Provision Issuer Keys
 
 ```bash
 cd backend/api
@@ -64,24 +119,33 @@ npm run keygen:issuer
 
 Copy `.env.example` to `.env` and set a strong `ADMIN_API_KEY` (min 16 chars).
 
-### 3. (Optional) Install trust bundle
+---
 
-To add issuer keys for portable verification:
+## 3. (Optional) Install Trust Bundle
+
+Trust bundles allow portable verification by installing issuer public keys.
+
+Install community bundle:
 
 ```bash
 npx tsx cli/trust-bundle-install.ts community
 ```
 
-**For local testing:** Seed a dev issuer, then install:
+For local testing:
 
 ```bash
 npm run seed:dev-issuer
 npx tsx cli/trust-bundle-install.ts community
 ```
 
-Bundles ship empty by default. See [Trust Bundles](docs/trust-bundles.md) to create or add issuers.
+Bundles ship empty by default.
 
-### 4. Start the stack
+See:
+`docs/trust-bundles.md`
+
+---
+
+## 4. Start the Stack
 
 Copy `.env.example` to `.env` at project root and set `ADMIN_API_KEY`:
 
@@ -91,21 +155,33 @@ cp .env.example .env
 docker compose -f infra/docker-compose.yml up --build
 ```
 
-### 5. Verify
+---
 
-- `GET http://localhost:8080/healthz` → `{"ok":true}`
-- `GET http://localhost:8080/readyz` → `{"ok":true}`
-- Run pilot smoke: `ADMIN_API_KEY=your-key npm run pilot:smoke` (from `backend/api`)
+## 5. Verify
 
-**Backend:** Set `TRUST_ANCHORS_DIR` (e.g. `../../config/trust/anchors`) in `backend/api/.env` to load issuer keys from the trust anchors directory. Required for portable verification against non-local issuers.
+Health checks:
+
+* `GET http://localhost:8080/healthz` → `{"ok":true}`
+* `GET http://localhost:8080/readyz` → `{"ok":true}`
+
+Run pilot smoke test:
+
+```bash
+ADMIN_API_KEY=your-key npm run pilot:smoke
+```
+
+(From `backend/api`)
+
+**Portable verification:**
+Set `TRUST_ANCHORS_DIR` (e.g. `../../config/trust/anchors`) in `backend/api/.env` to load issuer keys from the trust anchors directory.
 
 ---
 
-## Project Structure
+# Project Structure
 
 ```
 a2ax-protocol/
-├── protocol/             # Core trust logic (certificate, identity, crypto, handshake, permissions, trust store, policy)
+├── protocol/             # Core trust logic (identity, crypto, handshake, trust store, policy)
 ├── config/               # defaultPolicy.yaml, trust/anchors/
 ├── bundles/              # Optional trust bundles (community, enterprise)
 ├── cli/                  # a2ax trust install
@@ -113,72 +189,122 @@ a2ax-protocol/
 ├── sdk/python/           # Python SDK
 ├── extensions/           # Optional interfaces (TrustScoring, Escrow, Compliance) + examples
 ├── backend/api/          # HTTP server (depends on protocol)
-├── infra/                # Docker Compose, Prometheus alerts
-└── docs/                 # API, trust model, portable certs, federation, governance
+├── infra/                # Docker Compose, monitoring
+└── docs/                 # Specifications, governance, trust model
 ```
 
 ---
 
-## Documentation
+# Documentation
 
-| Document | Description |
-|----------|-------------|
-| [Specification](docs/specification.md) | Formal spec: abstract, design principles, terminology |
-| [Manifesto](docs/manifesto.md) | Philosophical anchor and positioning |
-| [API Specification](docs/api.md) | REST endpoints and auth |
-| [Architecture](docs/architecture.md) | Layered model, data flow, fork scenario |
-| [Trust Model](docs/trust-model.md) | Verifier-controlled trust, no embedded anchors |
-| [Portable Certificates](docs/portable-certificates.md) | Verify without registry |
-| [Trust Bundles](docs/trust-bundles.md) | Installable issuer keys |
-| [Example Walkthrough](docs/example-walkthrough.md) | End-to-end flow: register, verify, handshake |
-| [Roadmap](docs/roadmap.md) | Public roadmap |
-| [Federation Roadmap](docs/federation-roadmap.md) | Cross-registry trust (future) |
-
-| [GitHub Setup](docs/github-setup.md) | Repo description, topics (for maintainers) |
-| [Governance](docs/governance.md) | Contribution, versioning, neutrality |
-| [Governance Philosophy](docs/governance-philosophy.md) | What A2AX is and is not |
-| [Cryptographic Flow](docs/crypto.md) | Ed25519, JWT, verification flow |
-| [Handshake Protocol](docs/handshake.md) | A2A session establishment |
-| [Security](docs/security.md) | Revocation, key rotation |
-| [Threat Model](docs/threat-model.md) | Security and mitigations |
-| [Deployment & Pilot](docs/deployment-and-pilot.md) | Rollout, rollback, SLOs |
-| [Production Hardening](docs/production-hardening.md) | KMS, secrets, TLS, audit archiving |
+| Document                                               | Description                    |
+| ------------------------------------------------------ | ------------------------------ |
+| [Specification](docs/specification.md)                 | Formal protocol definition     |
+| [Manifesto](docs/manifesto.md)                         | Philosophical anchor           |
+| [Architecture](docs/architecture.md)                   | Layered model and data flow    |
+| [Trust Model](docs/trust-model.md)                     | Verifier-controlled trust      |
+| [Portable Certificates](docs/portable-certificates.md) | Registry-free verification     |
+| [Trust Bundles](docs/trust-bundles.md)                 | Installable issuer keys        |
+| [Cryptographic Flow](docs/crypto.md)                   | Ed25519, signing, verification |
+| [Handshake Protocol](docs/handshake.md)                | A2A session establishment      |
+| [Threat Model](docs/threat-model.md)                   | Risks and mitigations          |
+| [API Specification](docs/api.md)                       | REST endpoints                 |
+| [Example Walkthrough](docs/example-walkthrough.md)     | End-to-end flow                |
+| [Governance](docs/governance.md)                       | Contribution and neutrality    |
+| [Governance Philosophy](docs/governance-philosophy.md) | What A2AX is and is not        |
+| [Security](docs/security.md)                           | Revocation and key rotation    |
+| [Production Hardening](docs/production-hardening.md)   | KMS, TLS, audit archiving      |
+| [Deployment & Pilot](docs/deployment-and-pilot.md)     | Rollout and rollback           |
 | [Enterprise Onboarding](docs/enterprise-onboarding.md) | Optional commercial onboarding |
-| [Versioning](VERSION.md) | Semantic versioning, compatibility rules |
+| [Roadmap](docs/roadmap.md)                             | Public roadmap                 |
+| [Federation Roadmap](docs/federation-roadmap.md)       | Cross-registry trust (future)  |
+| [Versioning](VERSION.md)                               | Semantic versioning rules      |
 
 ---
 
-## SDKs
+# SDKs
 
-- **TypeScript**: `sdk/typescript/` — Sign requests, verify, handshake
-- **Python**: `sdk/python/` — Same capabilities
+* **TypeScript** — `sdk/typescript/`
+* **Python** — `sdk/python/`
+
+SDKs provide helpers for signing, verification, and handshake orchestration.
 
 ---
 
-## License
+# What A2AX Is (and Is Not)
 
-MIT License — see [LICENSE](LICENSE). Copyright (c) 2026 Williams Creative.
+This repository provides foundational trust primitives.
+
+It is not:
+
+* A centralized registry
+* A marketplace
+* A tokenized system
+* A ranking platform
+* An economic exchange layer
+
+It is infrastructure.
+
+A2AX defines the identity and trust substrate upon which autonomous economic systems can be built.
+
+---
+
+# Independence
+
+A2AX can be:
+
+- Forked
+- Self-hosted
+- Verified without external services
+- Extended without permission
+
+No commercial service is required to use the protocol.
+
+Trust policy remains fully verifier-controlled.
+
+---
+
+# License
+
+MIT License — see [LICENSE](LICENSE).
+Copyright (c) 2026 Williams Creative.
 
 **Trademark:** A2AX and A2AX Protocol are trademarks of Williams Creative. Use of the A2AX name or branding in a manner that implies endorsement or causes confusion is not permitted. See [TRADEMARK.md](TRADEMARK.md) for details.
 
 ---
 
-## Open vs Closed
+# Contributing
 
-| Open (this repo) | Closed (Williams Creative offerings) |
-|------------------|--------------------------------------|
-| Protocol, API server, SDKs | Managed hosting, enterprise dashboards |
-| Identity, verification, trust, handshake | Escrow, conditional transactions (Phase 2) |
-| Self-host deployment | Compliance UI, usage analytics |
+See [CONTRIBUTING.md](CONTRIBUTING.md).
 
----
+Before submitting protocol changes:
 
-## Contributing
+1. Open an issue describing the proposal
+2. Ensure alignment with core design principles
+3. Update documentation accordingly
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+Protocol neutrality is non-negotiable.
 
 ---
 
-## Security
+# Security
 
-Report vulnerabilities to [SECURITY.md](SECURITY.md).
+Report vulnerabilities according to [SECURITY.md](SECURITY.md).
+
+---
+
+# Closing Position
+
+A2AX does not attempt to control the agent economy.
+
+It provides the missing trust substrate.
+
+If autonomous agents are to transact safely across systems, trust must be:
+
+* Cryptographically verifiable
+* Portable
+* Contextual
+* Verifier-controlled
+* Open
+
+That is what A2AX defines.

@@ -32,6 +32,15 @@ Open an issue with:
 3. **Test** — run builds and tests (see below)
 4. **Submit** a PR with a clear description of changes
 
+### Protocol Changes
+
+Before submitting protocol changes (handshake, verification, identity, capability scoping):
+
+1. **Open an issue** describing the proposal and rationale
+2. **Ensure alignment** with core design principles (see [README Design Principles](README.md#design-principles) and [governance](docs/governance.md))
+3. **Update documentation** — specification, API docs, and affected guides
+4. **Protocol neutrality is non-negotiable** — no mandatory registries, embedded trust anchors, or centralized verification
+
 ### Development Setup
 
 **Protocol (core):**

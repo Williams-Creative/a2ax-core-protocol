@@ -36,12 +36,11 @@ A2AX is designed to operate across:
 
 ## Design Principles
 
-1. **Neutrality** — The protocol defines verification mechanics, not who must be trusted.
-2. **Verifier Sovereignty** — Trust anchors are controlled locally.
-3. **Portability** — Certificates must verify without mandatory registry calls.
-4. **Extensibility** — Economic and settlement layers may be built atop A2AX.
-5. **Fork Safety** — No embedded root authority.
-6. **Interoperability** — Cross-organizational verification at first meeting.
+1. **Neutrality** — No mandatory trust anchors, embedded registries, or centralized authorities. Verification policy is entirely verifier-controlled.
+2. **Portability** — Certificates are self-contained and cryptographically verifiable without a live registry lookup.
+3. **Explicit Capability Scoping** — Agents declare capabilities with scoped permissions and optional limits. Trust decisions are contextual, not binary.
+4. **Cryptographic Integrity** — All identity artifacts are signed using modern cryptography (Ed25519), with replay protection and timestamp validation.
+5. **Extensibility** — Trust scoring, compliance logic, and economic extensions are pluggable via defined interfaces — not hardcoded into the protocol core.
 
 ---
 

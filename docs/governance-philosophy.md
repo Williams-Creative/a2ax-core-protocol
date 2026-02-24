@@ -2,12 +2,15 @@
 
 ## A2AX Is Not
 
-- A central authority
-- A gatekeeper
-- A mandatory registry
+- A centralized registry
+- A marketplace
+- A tokenized system
+- A ranking platform
+- An economic exchange layer
 
 ## A2AX Is
 
+- Infrastructure — the trust substrate upon which autonomous economic systems can be built
 - A trust verification standard
 - A pluggable identity layer
 - A neutral infrastructure component

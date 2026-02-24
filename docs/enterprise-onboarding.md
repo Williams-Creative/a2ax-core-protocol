@@ -1,5 +1,7 @@
 # Enterprise Onboarding (MVP)
 
+This document describes optional enterprise onboarding flows. A2AX core remains neutral; these workflows are deployment-specific.
+
 ## Onboarding sequence
 1. Create organization (`POST /v1/orgs`) with verification tier.
 2. Register agent identities under org (`POST /v1/agents/register`).

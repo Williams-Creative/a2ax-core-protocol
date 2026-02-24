@@ -1,97 +1,178 @@
-# The A2AX Manifesto
+# A2AX Manifesto
 
-Autonomous systems are beginning to transact, negotiate, coordinate, and operate independently across organizational boundaries.
+## Trust Is Infrastructure
 
-Yet trust between these systems remains undefined.
+Autonomous agents are transitioning from tools to actors.
 
-Human economic systems evolved institutions to establish trust:
+They will:
 
-* Identity verification
-* Certification authorities
-* Contract enforcement
-* Reputation systems
+- Negotiate
+- Execute contracts
+- Transfer value
+- Make decisions
+- Represent human and institutional interests
 
-Autonomous systems require the same — but at machine speed.
+As this transition accelerates, intelligence alone is insufficient.
 
-A2AX exists to define how agents trust each other at first meeting.
+The agent economy will not fail due to lack of intelligence.
 
----
+It will fail due to lack of trust.
 
-## A2AX Is Infrastructure
-
-A2AX is not a platform.  
-A2AX is not a company.  
-A2AX is not a registry.
-
-A2AX is a protocol.
-
-It defines how trust is verified — not who is trusted.
+Trust must become infrastructure.
 
 ---
 
-## Neutral by Design
+## The Problem
 
-Trust policy must remain sovereign.
+Today, agent trust is:
 
-Each verifier chooses:
+- Platform-bound
+- Registry-dependent
+- Implicit
+- Centrally mediated
 
-* Which issuers it trusts
-* Which jurisdictions it accepts
-* Which assurance levels it requires
+Verification is often replaced with:
 
-A2AX enforces cryptographic proof.  
-It does not enforce political alignment.
+- Allowlists
+- Hard-coded identities
+- Blind execution
+- Opaque trust scoring
 
----
+These approaches do not scale beyond single ecosystems.
 
-## Portable and Verifiable
-
-Agents must be verifiable:
-
-* Without mandatory central registry calls
-* Across independent ecosystems
-* At first interaction
-
-A2AX enables portable certificates and decentralized trust anchor models.
+They create fragmentation, lock-in, and systemic fragility.
 
 ---
 
-## Built for Economic Systems
+## The Requirement
 
-Autonomous agents will:
+Autonomous systems must be able to:
 
-* Negotiate contracts
-* Execute transactions
-* Exchange assets
-* Coordinate logistics
-* Represent corporations
+- Identify themselves cryptographically
+- Declare capabilities explicitly
+- Establish secure sessions
+- Sign attestations
+- Be evaluated under programmable trust policy
 
-Economic activity requires verifiable identity.
+Without requiring:
 
-A2AX is the trust layer beneath autonomous commerce.
+- Central registries
+- Platform ownership
+- Embedded trust anchors
+- Mandatory intermediaries
 
----
+Trust must be portable.
 
-## Forkable and Durable
+Trust must be contextual.
 
-A2AX embeds no central authority.  
-No mandatory root anchor.  
-No embedded governance.
-
-The protocol can be implemented, extended, and evolved without gatekeeping.
-
-Durability is achieved through neutrality.
+Trust must be verifier-controlled.
 
 ---
 
-## The Goal
+## The Position
 
-To make agent-to-agent trust:
+A2AX defines:
 
-* Instant
-* Verifiable
-* Cross-organizational
-* Cryptographically sound
-* Politically neutral
+- Identity primitives
+- Verification mechanics
+- Capability scoping
+- Trust evaluation interfaces
+- Secure A2A handshake
 
-A2AX defines the exchange layer for autonomous systems.
+It does not define:
+
+- Who is trusted
+- Which issuers are valid
+- What policies must apply
+- What economic systems must exist
+
+Those decisions remain external.
+
+The protocol enforces mechanics — not authority.
+
+---
+
+## Neutrality
+
+A2AX embeds:
+
+- No mandatory trust anchors
+- No central registry
+- No governance lock-in
+- No economic enforcement layer
+
+The trust store ships empty.
+
+Forking is permitted.
+
+Independent implementations are valid.
+
+Neutrality is structural — not rhetorical.
+
+---
+
+## Portability
+
+Certificates are:
+
+- Self-contained
+- Cryptographically verifiable
+- Registry-independent
+
+Verification does not require contacting a central authority.
+
+Trust decisions remain local.
+
+---
+
+## Extensibility
+
+The protocol is layered:
+
+Layer 1 — Core trust primitives  
+Layer 2 — Optional extensions  
+Layer 3 — Independent services  
+
+Extensions must not compromise neutrality.
+
+The core remains minimal.
+
+---
+
+## What A2AX Is Not
+
+A2AX is not:
+
+- A marketplace
+- A ranking system
+- A token network
+- A centralized registry
+- A managed trust graph
+
+It is infrastructure.
+
+It defines the trust substrate upon which autonomous economic systems can be built.
+
+---
+
+## The Long View
+
+Standards outlast companies.
+
+Protocols outlast products.
+
+Infrastructure must not depend on a single operator.
+
+If autonomous systems are to interact across institutions, jurisdictions, and economic domains, trust must be:
+
+- Cryptographically verifiable
+- Portable
+- Contextual
+- Verifier-controlled
+- Open
+
+A2AX exists to define that substrate.
+
+Nothing more.
+
+Nothing less.

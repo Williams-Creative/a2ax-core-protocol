@@ -22,10 +22,11 @@ flowchart TB
     Compliance[Compliance]
   end
 
-  subgraph L3 [Layer 3: Commercial Services - Not in Repo]
-    hosted[Hosted Trust Graph]
-    dashboards[Enterprise Dashboards]
-    economic[Economic Network Services]
+  subgraph L3 [Layer 3: Services (Future)]
+    hosted[Managed trust graph]
+    dashboards[Dashboards]
+    analytics[Analytics]
+    economic[Economic services]
   end
 
   L2 --> L1
