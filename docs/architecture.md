@@ -4,7 +4,7 @@
 
 ```mermaid
 flowchart TB
-  subgraph L1 [Layer 1: A2AX Protocol]
+  subgraph L1 ["Layer 1: A2AX Protocol"]
     identity[identity]
     crypto[crypto]
     handshake[handshake]
@@ -16,14 +16,14 @@ flowchart TB
     revocation[revocation]
   end
 
-  subgraph L2 [Layer 2: Optional Extensions]
+  subgraph L2 ["Layer 2: Optional Extensions"]
     TrustScoring[TrustScoring]
     Escrow[Escrow]
     Compliance[Compliance]
   end
 
-  subgraph L3 [Layer 3: Services (Future)]
-    hosted[Managed trust graph]
+  subgraph L3 ["Layer 3: Services (Future)"]
+    mgmt_graph[Managed trust graph]
     dashboards[Dashboards]
     analytics[Analytics]
     economic[Economic services]
@@ -43,23 +43,21 @@ flowchart TB
 
 ## Handshake Lifecycle
 
-```
-Client                          Server
-  |                                |
-  |-- POST /handshake/verify ----->|
-  |   { agent_id, handshake_req_jws, requested_scopes, nonce, timestamp }
-  |                                |
-  |                                |-- Check revocation
-  |                                |-- Verify JWT (public key)
-  |                                |-- Check protocol_version
-  |                                |-- Validate timestamp skew
-  |                                |-- Validate nonce + scopes
-  |<-- { valid, session_proposal } -|
-  |                                |
-  |-- POST /handshake/session ---->|  (admin auth)
-  |   { agent_id, accepted_scopes }
-  |                                |
-  |<-- { session_token } ----------|
+```mermaid
+sequenceDiagram
+  participant Client
+  participant Server
+  Client->>+Server: POST /handshake/verify
+  Note right of Client: agent_id, handshake_req_jws, requested_scopes, nonce, timestamp
+  Server->>Server: Check revocation
+  Server->>Server: Verify JWT (public key)
+  Server->>Server: Check protocol_version
+  Server->>Server: Validate timestamp skew
+  Server->>Server: Validate nonce + scopes
+  Server-->>-Client: valid, session_proposal
+  Client->>+Server: POST /handshake/session (admin auth)
+  Note right of Client: agent_id, accepted_scopes
+  Server-->>-Client: session_token
 ```
 
 ## Extension Injection Model

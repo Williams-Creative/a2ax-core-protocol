@@ -1,0 +1,233 @@
+% A2AX: The Open Trust Standard for Autonomous Agents
+% Version 0.1.0 | MIT License | Williams Creative | February 2026
+% arXiv submission: cs (Computer Science) — cs.CR, cs.AI, or cs.MA
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{listings}
+\usepackage{microtype}
+\usepackage{ragged2e}
+\usepackage{needspace}
+\usepackage[margin=1in]{geometry}
+\usepackage[parfill]{parskip}
+
+% Reduce orphans and widows
+\widowpenalty=10000
+\clubpenalty=10000
+\displaywidowpenalty=10000
+
+% Allow LaTeX to stretch/shrink to avoid overfull hboxes
+\setlength{\emergencystretch}{2em}
+\tolerance=500
+\hbadness=5000
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  urlcolor=blue,
+  citecolor=blue,
+  breaklinks=true
+}
+
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  breakatwhitespace=false,
+  breakindent=0pt,
+  frame=single,
+  numbers=left,
+  numberstyle=\tiny,
+  xleftmargin=1.5em,
+  columns=fullflexible,
+  keepspaces=true
+}
+
+\title{A2AX: The Open Trust Standard for Autonomous Agents}
+\author{Darrell Williams - Williams Creative}
+\date{February 2026}
+
+\begin{document}
+
+\sloppy
+
+\maketitle
+
+\begin{abstract}
+Autonomous agents are increasingly participating in economic, computational, and collaborative ecosystems. Trust is the critical enabler for these systems. A2AX (Agent-to-Agent Exchange) provides an open, neutral trust substrate that allows agents to verify identity, declare capabilities, establish secure sessions, and operate under verifier-defined policies---all without reliance on centralized authorities. The protocol specifies identity structure, certificate format, cryptographic verification rules, and trust anchor handling while leaving trust policy, trusted issuers, and governance decisions entirely verifier-controlled. A2AX is designed to operate across public and private agent networks, independent organizations, and federated ecosystems. This paper presents the protocol principles, core architecture, capabilities, security model, and governance philosophy.
+\end{abstract}
+
+\section{Introduction}
+
+Autonomous agents are evolving rapidly. From financial trading bots to logistics orchestration systems, these entities must interact securely, verifiably, and at scale. Current trust mechanisms---centralized registries, hard-coded allowlists, opaque scoring---are insufficient, leading to operational risks. A2AX introduces a standardized trust infrastructure for agent-native interactions, bridging this gap.
+
+\section{Background and Motivation}
+
+\subsection{Trust as Infrastructure}
+
+Agents need mechanisms to verify the authenticity, capability, and reliability of peers. Without verifiable trust, errors, miscoordination, and exploitation are inevitable. Adoption depends on maintaining a vendor-neutral, forkable protocol.
+
+\subsection{Related Work}
+
+\begin{itemize}
+  \item \textbf{DID (Decentralized Identifiers)} --- Provides agent identity; limited scope for trust evaluation.
+  \item \textbf{OAuth 2.0 / OpenID Connect} --- Human-focused; not agent-native.
+  \item \textbf{Blockchain registries} --- Decentralized verification, but limited portability and interoperability.
+\end{itemize}
+
+A2AX complements these systems, providing verifiable trust primitives tailored for autonomous agents.
+
+\section{Protocol Principles}
+
+A2AX is built on five foundational principles:
+
+\begin{enumerate}
+  \item \textbf{Neutrality} --- No mandatory trust anchors, embedded registries, or centralized authorities. Verification policy is entirely verifier-controlled.
+  \item \textbf{Portability} --- Certificates are self-contained and cryptographically verifiable without a live registry lookup.
+  \item \textbf{Explicit Capability Scoping} --- Agents declare capabilities with scoped permissions and optional limits. Trust decisions are contextual, not binary.
+  \item \textbf{Cryptographic Integrity} --- All identity artifacts are signed using Ed25519, with replay protection and timestamp validation.
+  \item \textbf{Extensibility} --- Trust scoring, compliance logic, and economic extensions are pluggable via defined interfaces---not hardcoded into the protocol core.
+\end{enumerate}
+
+\section{Core Architecture}
+
+The protocol is organized in three layers:
+
+\needspace{5\baselineskip}
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}l l X@{}}
+\toprule
+\textbf{Layer} & \textbf{Scope} & \textbf{Contents} \\
+\midrule
+Layer 1 & A2AX Protocol & Identity, crypto, handshake, permissions, attestation, audit, version, revocation \\
+Layer 2 & Optional Extensions & Trust scoring, Escrow, Compliance \\
+Layer 3 & Services (Future) & Managed trust graph, dashboards, analytics, economic services \\
+\bottomrule
+\end{tabularx}
+\caption{A2AX layered architecture.}
+\end{table}
+
+The protocol compiles and runs in isolation. Extensions are optional. Services are not required. The core remains open, neutral, and self-hostable.
+
+\section{Protocol Capabilities}
+
+\begin{itemize}
+  \item \textbf{Agent Identity Issuance} --- Unique agent IDs, signed certificates, capability manifests.
+  \item \textbf{Cryptographic Verification} --- Ed25519 signatures, nonce replay protection, timestamp validation.
+  \item \textbf{Portable Certificates} --- Registry-independent verification; independent trust store configuration.
+  \item \textbf{Trust Scoring Engine} --- Rule-based trust evaluation (extensible via interface).
+  \item \textbf{Capability Declaration} --- Scope-based permissions with optional quantitative limits.
+  \item \textbf{A2A Handshake Protocol} --- Secure session establishment between agents.
+  \item \textbf{Audit and Compliance} --- Append-only audit logs, correlation IDs, filtered export.
+\end{itemize}
+
+\section{Handshake Lifecycle}
+
+The handshake protocol proceeds as follows:
+
+\begin{enumerate}
+  \item \textbf{Initiate} --- Agent A sends \texttt{agent\_id}, \texttt{agent\_cert\_jws}, \texttt{capability\_manifest}, and \texttt{handshake\_req\_jws} (signed payload with nonce, timestamp, requested scopes, session TTL).
+  \item \textbf{Verify} --- Agent B (or verifier) calls \texttt{POST /v1/handshake/verify}. The server verifies revocation status, agent key presence, JWS validity, and nonce/timestamp consistency.
+  \item \textbf{Session Proposal} --- Server returns \texttt{valid}, \texttt{session\_proposal.session\_id}, \texttt{expires\_at}, and \texttt{accepted\_scopes}.
+  \item \textbf{Session Token} --- Optional: Agent B calls \texttt{POST /v1/handshake/session} to receive a server-signed \texttt{session\_token}.
+\end{enumerate}
+
+Verification policy is verifier-controlled; no mandatory central registry is required.
+
+\section{Reference Implementation}
+
+\begin{itemize}
+  \item \textbf{GitHub Repository} --- \url{https://github.com/Williams-Creative/a2ax-protocol}
+  \item \textbf{SDKs} --- TypeScript and Python
+  \item \textbf{CLI Tools} --- Trust bundle install, dev issuer seed, certificate export
+\end{itemize}
+
+Reference implementations demonstrate protocol mechanics; the standard is defined in the specification. Example certificate structure:
+
+\needspace{8\baselineskip}
+\begin{lstlisting}[caption={Example agent certificate structure.}]
+{
+  "agent_id": "a2ax:agent:1234",
+  "capabilities": {
+    "transfer": {"limit": 1000, "currency": "USD"},
+    "query": {"scope": "inventory"}
+  },
+  "signature": "ed25519:..."
+}
+\end{lstlisting}
+
+\section{Security and Threat Model}
+
+\subsection{Cryptography}
+
+Ed25519 signatures, replay protection via nonce and timestamp validation. Issuer private keys can be loaded from mounted files or KMS to avoid inline secret exposure.
+
+\subsection{Threats and Mitigations}
+
+\begin{itemize}
+  \item \textbf{Replay attacks} --- Nonce uniqueness with TTL and timestamp window checks.
+  \item \textbf{Man-in-the-middle} --- Cryptographic signatures on all identity artifacts.
+  \item \textbf{Unauthorized access} --- Capability policy with explicit restricted operations; revocation table with immediate deny.
+  \item \textbf{Audit tampering} --- Append-only audit logging with request correlation IDs.
+\end{itemize}
+
+Revocation is verifier-controlled, not protocol-enforced. For production scale, issuer signing should use managed KMS/HSM with key rotation.
+
+\section{Governance and Neutrality}
+
+\subsection{What A2AX Is Not}
+
+A2AX is not a centralized registry, marketplace, tokenized system, ranking platform, or economic exchange layer.
+
+\subsection{What A2AX Is}
+
+A2AX is infrastructure---the trust substrate upon which autonomous economic systems can be built. It is a trust verification standard, a pluggable identity layer, and a neutral infrastructure component. It is commercially extensible.
+
+\subsection{Governance Principles}
+
+\begin{itemize}
+  \item Governance defines process, not trust authority.
+  \item All changes are public (GitHub Issues and PRs).
+  \item The protocol runs independently of extensions.
+  \item Forks are encouraged; implementations cannot embed centralized control.
+  \item The trust store ships empty by default.
+\end{itemize}
+
+\section{Use Cases}
+
+\begin{itemize}
+  \item Agent-to-agent financial transactions
+  \item Decentralized AI collaboration platforms
+  \item Multi-party service orchestration
+  \item Capability-bound service invocation
+\end{itemize}
+
+\section{Roadmap}
+
+\textbf{Near-term:} Trust bundle implementation, dev/demo community bundle, federation design. \textbf{Medium-term:} Federation implementation, cross-registry trust. \textbf{Long-term:} Escrow semantics, attestation chains, delegation chains.
+
+\section{Conclusion}
+
+A2AX provides open, neutral, verifiable trust primitives for autonomous agents, enabling safe collaboration at scale without central authorities. The protocol defines the mechanics of trust, not trust itself, ensuring neutrality, portability, and extensibility for future agent ecosystems. The agent economy will not fail due to lack of intelligence; it will fail due to lack of trust. A2AX is designed to prevent that failure.
+
+\begin{thebibliography}{9}
+
+\bibitem{a2ax}
+A2AX GitHub Repository. \url{https://github.com/Williams-Creative/a2ax-protocol}
+
+\bibitem{ed25519}
+Bernstein, D.J., et al. Ed25519: High-speed high-security signatures. \url{https://ed25519.cr.yp.to/}
+
+\bibitem{semver}
+Semantic Versioning. \url{https://semver.org/}
+
+\end{thebibliography}
+
+\end{document}

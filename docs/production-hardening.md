@@ -93,8 +93,10 @@ Rotate by updating the Secret and rolling the deployment.
 
 ### Recommended Architecture
 
-```
-[Client] --TLS--> [Load Balancer / Reverse Proxy] --HTTP--> [API Container]
+```mermaid
+flowchart LR
+  Client -->|TLS| LB["Load Balancer / Reverse Proxy"]
+  LB -->|HTTP| API["API Container"]
 ```
 
 ### Options
