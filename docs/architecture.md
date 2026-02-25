@@ -2,6 +2,10 @@
 
 ## Layered Diagram
 
+![A2AX layered architecture](assets/architecture-layered.svg)
+
+*SVG above displays on all devices; Mermaid below renders on desktop/GitHub web.*
+
 ```mermaid
 flowchart TB
   subgraph L1 ["Layer 1: A2AX Protocol"]
@@ -16,7 +20,7 @@ flowchart TB
     revocation[revocation]
   end
 
-  subgraph L2 ["Layer 2: Optional Extensions"]
+  subgraph L2 ["Layer 2:<br/>Optional Extensions"]
     TrustScoring[TrustScoring]
     Escrow[Escrow]
     Compliance[Compliance]
@@ -42,6 +46,10 @@ flowchart TB
 4. **Trust Events**: Agent or system records success/failure/SLA → trust engine computes score.
 
 ## Handshake Lifecycle
+
+![A2AX handshake lifecycle](assets/handshake-lifecycle.svg)
+
+*SVG above displays on all devices; Mermaid below renders on desktop/GitHub web.*
 
 ```mermaid
 sequenceDiagram

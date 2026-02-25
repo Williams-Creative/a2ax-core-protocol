@@ -4,6 +4,22 @@ All notable changes to the A2AX Protocol are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.1.3] - 2026-02-25
+
+### Added
+
+- docs/assets/: SVG fallbacks for diagrams (mobile display on GitHub app)
+  - architecture-layered.svg, handshake-lifecycle.svg, tls-termination-flow.svg
+
+### Changed
+
+- architecture.md: Add SVG fallbacks for layered and handshake diagrams; fix Layer 2 Mermaid label overlap (line break)
+- production-hardening.md: Add SVG fallback for TLS termination flow
+- handshake-lifecycle.svg: Fix dark text on dark background (white bg, improved contrast)
+- architecture-layered.svg: Fix Layer 2 obscured text (increased padding between title and nodes)
+
+---
+
 ## [0.1.2] - 2026-02-24
 
 ### Added

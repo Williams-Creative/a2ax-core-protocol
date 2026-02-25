@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 320" width="420" height="320" role="img" aria-label="A2AX handshake lifecycle sequence diagram">
+  <!-- Light background for readability in dark mode -->
+  <rect width="420" height="320" fill="#ffffff"/>
+  <defs>
+    <style>
+      .participant { font: 12px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-weight: 600; fill: #1a1a1a; }
+      .message { font: 10px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #1a1a1a; }
+      .note { font: 9px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #333333; }
+      .line { stroke: #57606a; stroke-width: 1; }
+      .arrow { stroke: #0969da; stroke-width: 1.5; fill: none; }
+      .activation { fill: #ddf4ff; stroke: #54aeff; }
+    </style>
+  </defs>
+  <!-- Participants -->
+  <rect x="20" y="10" width="100" height="30" rx="4" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text class="participant" x="70" y="30" text-anchor="middle">Client</text>
+  <rect x="300" y="10" width="100" height="30" rx="4" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text class="participant" x="350" y="30" text-anchor="middle">Server</text>
+  <!-- Lifelines -->
+  <line class="line" x1="70" y1="40" x2="70" y2="310"/>
+  <line class="line" x1="350" y1="40" x2="350" y2="310"/>
+  <!-- Messages -->
+  <line class="arrow" x1="70" y1="55" x2="350" y2="55"/>
+  <polygon points="345,52 350,55 345,58" fill="#0969da"/>
+  <text class="message" x="210" y="50" text-anchor="middle">POST /handshake/verify</text>
+  <text class="note" x="75" y="72" text-anchor="start">agent_id, handshake_req_jws,</text>
+  <text class="note" x="75" y="82" text-anchor="start">requested_scopes, nonce, timestamp</text>
+  <!-- Server checks -->
+  <rect class="activation" x="340" y="90" width="20" height="95" rx="2"/>
+  <text class="message" x="350" y="105" text-anchor="middle">Check revocation</text>
+  <text class="message" x="350" y="120" text-anchor="middle">Verify JWT (public key)</text>
+  <text class="message" x="350" y="135" text-anchor="middle">Check protocol_version</text>
+  <text class="message" x="350" y="150" text-anchor="middle">Validate timestamp skew</text>
+  <text class="message" x="350" y="165" text-anchor="middle">Validate nonce + scopes</text>
+  <!-- Response -->
+  <line class="arrow" x1="350" y1="195" x2="70" y2="195"/>
+  <polygon points="75,192 70,195 75,198" fill="#0969da"/>
+  <text class="message" x="210" y="190" text-anchor="middle">valid, session_proposal</text>
+  <!-- Second request -->
+  <line class="arrow" x1="70" y1="220" x2="350" y2="220"/>
+  <polygon points="345,217 350,220 345,223" fill="#0969da"/>
+  <text class="message" x="210" y="215" text-anchor="middle">POST /handshake/session (admin auth)</text>
+  <text class="note" x="75" y="237" text-anchor="start">agent_id, accepted_scopes</text>
+  <!-- Session token -->
+  <line class="arrow" x1="350" y1="260" x2="70" y2="260"/>
+  <polygon points="75,257 70,260 75,263" fill="#0969da"/>
+  <text class="message" x="210" y="255" text-anchor="middle">session_token</text>
+</svg>

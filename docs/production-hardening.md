@@ -93,6 +93,10 @@ Rotate by updating the Secret and rolling the deployment.
 
 ### Recommended Architecture
 
+![TLS termination flow](assets/tls-termination-flow.svg)
+
+*SVG above displays on all devices; Mermaid below renders on desktop/GitHub web.*
+
 ```mermaid
 flowchart LR
   Client -->|TLS| LB["Load Balancer / Reverse Proxy"]
