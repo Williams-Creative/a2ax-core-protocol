@@ -1,8 +1,8 @@
-# A2AX v0.1.0 — Open Trust Infrastructure for Autonomous Agents
+# A2AX-Core v0.1.3 — Open Trust Infrastructure for Autonomous Agents
 
-## What is A2AX?
+## What is A2AX-Core?
 
-**A2AX (Agent-to-Agent Exchange)** is an open, neutral trust protocol for autonomous agents.
+**A2AX-Core** is an open, neutral trust protocol for autonomous agents.
 
 It provides cryptographic identity, portable verification, capability-scoped permissions, and verifier-controlled trust policy — enabling AI agents to transact, attest, and collaborate without relying on centralized registries or embedded trust anchors.
 
@@ -10,13 +10,13 @@ As autonomous agents increasingly participate in economic systems, trust becomes
 
 Autonomous systems do not fail due to insufficient intelligence — they fail due to insufficient trust.
 
-A2AX is designed to prevent that failure.
+A2AX-Core is designed to prevent that failure.
 
 ---
 
 ## Design Principles
 
-A2AX is built on five foundational principles:
+A2AX-Core is built on five foundational principles:
 
 ### 1. Neutrality
 
@@ -41,7 +41,7 @@ Trust scoring, compliance logic, and economic extensions are pluggable via defin
 
 ---
 
-## Why A2AX Exists
+## Why A2AX-Core Exists
 
 As AI systems evolve from tools into autonomous actors, they require:
 
@@ -58,7 +58,7 @@ Without these primitives, agent ecosystems depend on:
 * Platform lock-in
 * Blind execution
 
-A2AX replaces implicit trust with verifiable trust.
+A2AX-Core replaces implicit trust with verifiable trust.
 
 ---
 
@@ -110,7 +110,7 @@ A2AX replaces implicit trust with verifiable trust.
 
 ---
 
-## What's Included in v0.1.0
+## What's Included in v0.1.3
 
 This is the first public release of the A2AX protocol core.
 
@@ -167,7 +167,7 @@ docs/example-walkthrough.md
 
 ## Architectural Direction
 
-A2AX is structured in layers:
+A2AX-Core is structured in layers:
 
 **Layer 1 — Protocol Core**
 
@@ -206,7 +206,7 @@ It is not:
 
 It is infrastructure.
 
-A2AX defines the identity and trust substrate upon which autonomous economic systems can be built.
+A2AX-Core defines the identity and trust substrate upon which autonomous economic systems can be built.
 
 ---
 
@@ -227,4 +227,4 @@ Upcoming releases will prioritize:
 * Performance benchmarking and profiling guidance
 * Interoperability patterns with external agent frameworks
 
-A2AX is designed to become a neutral trust standard — not a centralized platform.
+A2AX-Core is designed to become a neutral trust standard — not a centralized platform.

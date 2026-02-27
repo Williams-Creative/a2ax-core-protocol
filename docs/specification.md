@@ -1,8 +1,6 @@
-# A2AX v1.0
+# A2AX-Core Protocol Specification v1.0
 
-## Agent-to-Agent Exchange Protocol
-
-### Open Trust & Identity Layer for Autonomous Systems
+## Open Trust & Identity Layer for Autonomous Systems
 
 **Status:** Draft v1.0  
 **Category:** Standards Track  
@@ -12,7 +10,7 @@
 
 ## Abstract
 
-A2AX defines a neutral, interoperable protocol for agent-to-agent identity verification and trust exchange across independent autonomous systems.
+The A2AX-Core Protocol defines a neutral, interoperable protocol for agent-to-agent identity verification and trust exchange across independent autonomous systems.
 
 The protocol specifies:
 
@@ -23,9 +21,9 @@ The protocol specifies:
 * Revocation mechanisms
 * Optional registry interaction
 
-A2AX does not define trust policy, trusted issuers, or governance decisions. These remain verifier-controlled and externally configurable.
+The A2AX-Core Protocol does not define trust policy, trusted issuers, or governance decisions. These remain verifier-controlled and externally configurable.
 
-A2AX is designed to operate across:
+The A2AX-Core Protocol is designed to operate across:
 
 * Public and private agent networks
 * Independent organizations
@@ -46,7 +44,7 @@ A2AX is designed to operate across:
 
 ## Non-Goals
 
-A2AX does not:
+The A2AX-Core Protocol does not:
 
 * Operate a mandatory global registry
 * Embed a default trust anchor list

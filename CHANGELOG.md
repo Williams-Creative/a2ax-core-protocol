@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to the A2AX Protocol are documented in this file.
+All notable changes to the A2AX-Core Protocol are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
@@ -10,13 +10,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - docs/assets/: SVG fallbacks for diagrams (mobile display on GitHub app)
   - architecture-layered.svg, handshake-lifecycle.svg, tls-termination-flow.svg
+- docs/PROTOCOL_IDENTITY_CHARTER: Naming doctrine (A2AX-Core vs A2AX-Core Protocol vs A2AX Ecosystem)
+- RELEASE_NOTES_v0.1.3.md: Public release notes (renamed from v0.1.0)
 
 ### Changed
 
-- architecture.md: Add SVG fallbacks for layered and handshake diagrams; fix Layer 2 Mermaid label overlap (line break)
+- **Protocol rename:** A2AX → A2AX-Core. The protocol is now formally referred to as A2AX-Core to reflect its role as the foundational trust substrate of the A2AX ecosystem. The core protocol remains unchanged. See [PROTOCOL_IDENTITY_CHARTER](docs/PROTOCOL_IDENTITY_CHARTER) for naming doctrine.
+- architecture.md: Add SVG fallbacks for layered and handshake diagrams; fix Layer 2 Mermaid label overlap; Layer 1 label to A2AX-Core Protocol
 - production-hardening.md: Add SVG fallback for TLS termination flow
 - handshake-lifecycle.svg: Fix dark text on dark background (white bg, improved contrast)
-- architecture-layered.svg: Fix Layer 2 obscured text (increased padding between title and nodes)
+- architecture-layered.svg: Fix Layer 2 obscured text (increased padding); Layer 1 label to A2AX-Core Protocol
+- README, specification, manifesto, governance, governance-philosophy, roadmap, enterprise-onboarding, security, trust-model, portable-certificates, github-setup, example-walkthrough: A2AX-Core naming
+- TRADEMARK.md, CONTRIBUTING.md, VERSION.md, SECURITY.md: A2AX-Core naming
+- whitepapers/001_A2AX_Open_Trust_Standard.tex: A2AX-Core naming
 
 ---
 

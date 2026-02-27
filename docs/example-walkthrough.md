@@ -1,6 +1,6 @@
 # End-to-End Example
 
-This walkthrough demonstrates the full A2AX flow: create org, register agent, verify certificate, and handshake.
+This walkthrough demonstrates the full A2AX-Core flow: create org, register agent, verify certificate, and handshake.
 
 ## Prerequisites
 

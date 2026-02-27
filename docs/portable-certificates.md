@@ -1,6 +1,6 @@
 # Portable Certificates
 
-A2AX Agent Certificates can be verified without contacting the registry.
+A2AX-Core Agent Certificates can be verified without contacting the registry.
 
 ## Format
 

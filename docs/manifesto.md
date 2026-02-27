@@ -1,4 +1,4 @@
-# A2AX Manifesto
+# A2AX-Core Manifesto
 
 ## Trust Is Infrastructure
 
@@ -71,7 +71,7 @@ Trust must be verifier-controlled.
 
 ## The Position
 
-A2AX defines:
+A2AX-Core defines:
 
 - Identity primitives
 - Verification mechanics
@@ -94,7 +94,7 @@ The protocol enforces mechanics — not authority.
 
 ## Neutrality
 
-A2AX embeds:
+A2AX-Core embeds:
 
 - No mandatory trust anchors
 - No central registry
@@ -139,9 +139,9 @@ The core remains minimal.
 
 ---
 
-## What A2AX Is Not
+## What A2AX-Core Is Not
 
-A2AX is not:
+A2AX-Core is not:
 
 - A marketplace
 - A ranking system
@@ -171,7 +171,7 @@ If autonomous systems are to interact across institutions, jurisdictions, and ec
 - Verifier-controlled
 - Open
 
-A2AX exists to define that substrate.
+A2AX-Core exists to define that substrate.
 
 Nothing more.
 

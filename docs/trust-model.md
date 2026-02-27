@@ -1,6 +1,6 @@
 # Trust Model
 
-A2AX defines verification mechanics. **Trust policy is verifier-controlled.**
+The A2AX-Core Protocol defines verification mechanics. **Trust policy is verifier-controlled.**
 
 ## No Embedded Trust Anchors
 

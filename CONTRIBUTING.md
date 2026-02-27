@@ -1,6 +1,6 @@
-# Contributing to A2AX Protocol
+# Contributing to A2AX-Core
 
-Thank you for your interest in contributing to A2AX. We welcome contributions from the community.
+Thank you for your interest in contributing to A2AX-Core. We welcome contributions from the community.
 
 ## Code of Conduct
 

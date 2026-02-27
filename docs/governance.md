@@ -1,10 +1,10 @@
-# A2AX Governance
+# A2AX-Core Governance
 
 ## Purpose
 
-This document defines the governance model for the A2AX Protocol.
+This document defines the governance model for the A2AX-Core Protocol.
 
-A2AX is an **open, neutral trust standard**. Governance exists to:
+A2AX-Core is an **open, neutral trust standard**. Governance exists to:
 
 - Maintain protocol clarity
 - Preserve neutrality
@@ -82,7 +82,7 @@ require:
 ## Neutrality Commitment
 
 - The protocol is **vendor-neutral** and **forkable**
-- No hardcoded A2AX endpoints, commercial hooks, or mandatory services
+- No hardcoded A2AX-Core endpoints, commercial hooks, or mandatory services
 - All trust evaluation, revocation, and storage mechanisms are **injectable**
 - Implementations can use any infrastructure without affecting protocol validity
 - No governance decision may restrict independent deployments or forks
@@ -117,7 +117,7 @@ require:
 
 ## Closing Statement
 
-A2AX governance exists to **protect neutrality** and ensure **specification clarity**.  
+A2AX-Core governance exists to **protect neutrality** and ensure **specification clarity**.  
 
 The protocol defines **trust mechanics**, **not trust authorities**.  
 

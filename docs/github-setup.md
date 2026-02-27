@@ -6,7 +6,7 @@ For maintainers: configure the repository for discoverability and clarity.
 
 ### Repository description
 
-**Short:** `A2AX Protocol — Open trust standard for agent identity and verification in autonomous systems`
+**Short:** `A2AX-Core Protocol — Open trust standard for agent identity and verification in autonomous systems`
 
 **Long (optional):** `Agent-to-Agent Exchange. Neutral, interoperable protocol for agent identity verification and trust exchange. No embedded trust anchors. Verifier-controlled.`
 

@@ -1,15 +1,13 @@
-# A2AX Protocol
+# A2AX-Core
 
 [![CI](https://github.com/Williams-Creative/a2ax-protocol/actions/workflows/ci.yml/badge.svg)](https://github.com/Williams-Creative/a2ax-protocol/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**A**gent-to-**A**gent E**x**change
+**Open Trust Infrastructure for Autonomous Agents**
 
 ---
 
-# Open Trust Infrastructure for Autonomous Agents
-
-**A2AX is an open, neutral trust protocol and identity layer for autonomous economic systems.**
+A2AX-Core is an open, neutral trust protocol and identity layer for autonomous economic systems.
 
 It provides:
 
@@ -19,22 +17,22 @@ It provides:
 * Verifier-controlled trust policy
 * Secure A2A handshake primitives
 
-A2AX enables agents to transact, attest, and collaborate **without centralized registries, embedded trust anchors, or platform lock-in.**
+A2AX-Core enables agents to transact, attest, and collaborate **without centralized registries, embedded trust anchors, or platform lock-in.**
 
 > *The agent economy will not fail due to lack of intelligence. It will fail due to lack of trust.*
-> A2AX is designed to prevent that failure.
+> A2AX-Core is designed to prevent that failure.
 
-**This protocol does not require A2AX-operated infrastructure to function.**
+**This protocol does not require A2AX-Core–operated infrastructure to function.**
 You can fork, self-host, and run verification independently.
 
-**A2AX defines verification mechanics. Trust policy is verifier-controlled.**
+**The A2AX-Core Protocol defines verification mechanics. Trust policy is verifier-controlled.**
 The trust store ships empty.
 
 ---
 
 # Design Principles
 
-A2AX is built on five foundational principles:
+A2AX-Core is built on five foundational principles:
 
 ### 1. Neutrality
 
@@ -67,7 +65,7 @@ Trust scoring, compliance logic, and economic extensions are pluggable via defin
 
 | Layer                                   | Scope                        | Contents                                                                    |
 | --------------------------------------- | ---------------------------- | --------------------------------------------------------------------------- |
-| **Layer 1 – A2AX Protocol** (this repo) | Core trust primitives        | Identity, Certificates, Verification, Trust Store, Policy Engine, Handshake |
+| **Layer 1 – A2AX-Core Protocol** (this repo) | Core trust primitives        | Identity, Certificates, Verification, Trust Store, Policy Engine, Handshake |
 | **Layer 2 – Optional Extensions**       | Pluggable modules            | Risk scoring, Escrow, Compliance (interfaces only)                          |
 | **Layer 3 – Services (Future)**         | Hosted or ecosystem services | Managed trust graph, dashboards, analytics, economic services               |
 
@@ -76,6 +74,11 @@ Extensions are optional.
 Services are not required.
 
 The core remains open, neutral, and self-hostable.
+
+**A2AX Ecosystem structure:**
+- **A2AX-Core** — Trust & Identity Protocol (this repo)
+- **A2AX-Extensions** — Optional modules (scoring, escrow, compliance)
+- **A2AX-Services** — Non-core ecosystem services (future)
 
 ---
 
@@ -199,6 +202,7 @@ a2ax-protocol/
 
 | Document                                               | Description                    |
 | ------------------------------------------------------ | ------------------------------ |
+| [Protocol Identity Charter](docs/PROTOCOL_IDENTITY_CHARTER) | Naming doctrine, scope, principles |
 | [Specification](docs/specification.md)                 | Formal protocol definition     |
 | [Manifesto](docs/manifesto.md)                         | Philosophical anchor           |
 | [Architecture](docs/architecture.md)                   | Layered model and data flow    |
@@ -211,7 +215,7 @@ a2ax-protocol/
 | [API Specification](docs/api.md)                       | REST endpoints                 |
 | [Example Walkthrough](docs/example-walkthrough.md)     | End-to-end flow                |
 | [Governance](docs/governance.md)                       | Contribution and neutrality    |
-| [Governance Philosophy](docs/governance-philosophy.md) | What A2AX is and is not        |
+| [Governance Philosophy](docs/governance-philosophy.md) | What A2AX-Core is and is not        |
 | [Security](docs/security.md)                           | Revocation and key rotation    |
 | [Production Hardening](docs/production-hardening.md)   | KMS, TLS, audit archiving      |
 | [Deployment & Pilot](docs/deployment-and-pilot.md)     | Rollout and rollback           |
@@ -220,6 +224,7 @@ a2ax-protocol/
 | [Federation Roadmap](docs/federation-roadmap.md)       | Cross-registry trust (future)  |
 | [Versioning](VERSION.md)                               | Semantic versioning rules      |
 | [Whitepaper](whitepapers/001_A2AX_Open_Trust_Standard.tex) | LaTeX source for arXiv        |
+| [Release Notes v0.1.3](RELEASE_NOTES_v0.1.3.md) | Public release notes          |
 
 ---
 
@@ -232,7 +237,7 @@ SDKs provide helpers for signing, verification, and handshake orchestration.
 
 ---
 
-# What A2AX Is (and Is Not)
+# What A2AX-Core Is (and Is Not)
 
 This repository provides foundational trust primitives.
 
@@ -246,13 +251,13 @@ It is not:
 
 It is infrastructure.
 
-A2AX defines the identity and trust substrate upon which autonomous economic systems can be built.
+A2AX-Core defines the identity and trust substrate upon which autonomous economic systems can be built.
 
 ---
 
 # Independence
 
-A2AX can be:
+A2AX-Core can be:
 
 - Forked
 - Self-hosted
@@ -270,7 +275,7 @@ Trust policy remains fully verifier-controlled.
 MIT License — see [LICENSE](LICENSE).
 Copyright (c) 2026 Williams Creative.
 
-**Trademark:** A2AX and A2AX Protocol are trademarks of Williams Creative. Use of the A2AX name or branding in a manner that implies endorsement or causes confusion is not permitted. See [TRADEMARK.md](TRADEMARK.md) for details.
+**Trademark:** A2AX-Core and A2AX-Core Protocol are trademarks of Williams Creative. Use of the A2AX-Core name or branding in a manner that implies endorsement or causes confusion is not permitted. See [TRADEMARK.md](TRADEMARK.md) for details.
 
 ---
 
@@ -296,7 +301,7 @@ Report vulnerabilities according to [SECURITY.md](SECURITY.md).
 
 # Closing Position
 
-A2AX does not attempt to control the agent economy.
+A2AX-Core does not attempt to control the agent economy.
 
 It provides the missing trust substrate.
 
@@ -308,4 +313,4 @@ If autonomous agents are to transact safely across systems, trust must be:
 * Verifier-controlled
 * Open
 
-That is what A2AX defines.
+That is what the A2AX-Core Protocol defines.

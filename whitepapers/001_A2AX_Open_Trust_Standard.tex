@@ -1,4 +1,4 @@
-% A2AX: The Open Trust Standard for Autonomous Agents
+% A2AX-Core: The Open Trust Standard for Autonomous Agents
 % Version 0.1.0 | MIT License | Williams Creative | February 2026
 % arXiv submission: cs (Computer Science) — cs.CR, cs.AI, or cs.MA
 
@@ -48,7 +48,7 @@
   keepspaces=true
 }
 
-\title{A2AX: The Open Trust Standard for Autonomous Agents}
+\title{A2AX-Core: The Open Trust Standard for Autonomous Agents}
 \author{Darrell Williams - Williams Creative}
 \date{February 2026}
 
@@ -59,12 +59,12 @@
 \maketitle
 
 \begin{abstract}
-Autonomous agents are increasingly participating in economic, computational, and collaborative ecosystems. Trust is the critical enabler for these systems. A2AX (Agent-to-Agent Exchange) provides an open, neutral trust substrate that allows agents to verify identity, declare capabilities, establish secure sessions, and operate under verifier-defined policies---all without reliance on centralized authorities. The protocol specifies identity structure, certificate format, cryptographic verification rules, and trust anchor handling while leaving trust policy, trusted issuers, and governance decisions entirely verifier-controlled. A2AX is designed to operate across public and private agent networks, independent organizations, and federated ecosystems. This paper presents the protocol principles, core architecture, capabilities, security model, and governance philosophy.
+Autonomous agents are increasingly participating in economic, computational, and collaborative ecosystems. Trust is the critical enabler for these systems. A2AX-Core provides an open, neutral trust substrate that allows agents to verify identity, declare capabilities, establish secure sessions, and operate under verifier-defined policies---all without reliance on centralized authorities. The A2AX-Core Protocol specifies identity structure, certificate format, cryptographic verification rules, and trust anchor handling while leaving trust policy, trusted issuers, and governance decisions entirely verifier-controlled. A2AX-Core is designed to operate across public and private agent networks, independent organizations, and federated ecosystems. This paper presents the protocol principles, core architecture, capabilities, security model, and governance philosophy.
 \end{abstract}
 
 \section{Introduction}
 
-Autonomous agents are evolving rapidly. From financial trading bots to logistics orchestration systems, these entities must interact securely, verifiably, and at scale. Current trust mechanisms---centralized registries, hard-coded allowlists, opaque scoring---are insufficient, leading to operational risks. A2AX introduces a standardized trust infrastructure for agent-native interactions, bridging this gap.
+Autonomous agents are evolving rapidly. From financial trading bots to logistics orchestration systems, these entities must interact securely, verifiably, and at scale. Current trust mechanisms---centralized registries, hard-coded allowlists, opaque scoring---are insufficient, leading to operational risks. A2AX-Core introduces a standardized trust infrastructure for agent-native interactions, bridging this gap.
 
 \section{Background and Motivation}
 
@@ -80,11 +80,11 @@ Agents need mechanisms to verify the authenticity, capability, and reliability o
   \item \textbf{Blockchain registries} --- Decentralized verification, but limited portability and interoperability.
 \end{itemize}
 
-A2AX complements these systems, providing verifiable trust primitives tailored for autonomous agents.
+A2AX-Core complements these systems, providing verifiable trust primitives tailored for autonomous agents.
 
 \section{Protocol Principles}
 
-A2AX is built on five foundational principles:
+A2AX-Core is built on five foundational principles:
 
 \begin{enumerate}
   \item \textbf{Neutrality} --- No mandatory trust anchors, embedded registries, or centralized authorities. Verification policy is entirely verifier-controlled.
@@ -106,12 +106,12 @@ The protocol is organized in three layers:
 \toprule
 \textbf{Layer} & \textbf{Scope} & \textbf{Contents} \\
 \midrule
-Layer 1 & A2AX Protocol & Identity, crypto, handshake, permissions, attestation, audit, version, revocation \\
+Layer 1 & A2AX-Core Protocol & Identity, crypto, handshake, permissions, attestation, audit, version, revocation \\
 Layer 2 & Optional Extensions & Trust scoring, Escrow, Compliance \\
 Layer 3 & Services (Future) & Managed trust graph, dashboards, analytics, economic services \\
 \bottomrule
 \end{tabularx}
-\caption{A2AX layered architecture.}
+\caption{A2AX-Core layered architecture.}
 \end{table}
 
 The protocol compiles and runs in isolation. Extensions are optional. Services are not required. The core remains open, neutral, and self-hostable.
@@ -182,13 +182,13 @@ Revocation is verifier-controlled, not protocol-enforced. For production scale, 
 
 \section{Governance and Neutrality}
 
-\subsection{What A2AX Is Not}
+\subsection{What A2AX-Core Is Not}
 
-A2AX is not a centralized registry, marketplace, tokenized system, ranking platform, or economic exchange layer.
+A2AX-Core is not a centralized registry, marketplace, tokenized system, ranking platform, or economic exchange layer.
 
-\subsection{What A2AX Is}
+\subsection{What A2AX-Core Is}
 
-A2AX is infrastructure---the trust substrate upon which autonomous economic systems can be built. It is a trust verification standard, a pluggable identity layer, and a neutral infrastructure component. It is commercially extensible.
+A2AX-Core is infrastructure---the trust substrate upon which autonomous economic systems can be built. It is a trust verification standard, a pluggable identity layer, and a neutral infrastructure component. It is commercially extensible.
 
 \subsection{Governance Principles}
 
@@ -215,12 +215,12 @@ A2AX is infrastructure---the trust substrate upon which autonomous economic syst
 
 \section{Conclusion}
 
-A2AX provides open, neutral, verifiable trust primitives for autonomous agents, enabling safe collaboration at scale without central authorities. The protocol defines the mechanics of trust, not trust itself, ensuring neutrality, portability, and extensibility for future agent ecosystems. The agent economy will not fail due to lack of intelligence; it will fail due to lack of trust. A2AX is designed to prevent that failure.
+A2AX-Core provides open, neutral, verifiable trust primitives for autonomous agents, enabling safe collaboration at scale without central authorities. The A2AX-Core Protocol defines the mechanics of trust, not trust itself, ensuring neutrality, portability, and extensibility for future agent ecosystems. The agent economy will not fail due to lack of intelligence; it will fail due to lack of trust. A2AX-Core is designed to prevent that failure.
 
 \begin{thebibliography}{9}
 
 \bibitem{a2ax}
-A2AX GitHub Repository. \url{https://github.com/Williams-Creative/a2ax-protocol}
+A2AX-Core GitHub Repository. \url{https://github.com/Williams-Creative/a2ax-protocol}
 
 \bibitem{ed25519}
 Bernstein, D.J., et al. Ed25519: High-speed high-security signatures. \url{https://ed25519.cr.yp.to/}

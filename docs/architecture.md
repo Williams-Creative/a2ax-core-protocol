@@ -2,13 +2,13 @@
 
 ## Layered Diagram
 
-![A2AX layered architecture](assets/architecture-layered.svg)
+![A2AX-Core layered architecture](assets/architecture-layered.svg)
 
 *SVG above displays on all devices; Mermaid below renders on desktop/GitHub web.*
 
 ```mermaid
 flowchart TB
-  subgraph L1 ["Layer 1: A2AX Protocol"]
+  subgraph L1 ["Layer 1: A2AX-Core Protocol"]
     identity[identity]
     crypto[crypto]
     handshake[handshake]
@@ -49,7 +49,7 @@ flowchart TB
 
 ## Handshake Lifecycle
 
-![A2AX handshake lifecycle](assets/handshake-lifecycle.svg)
+![A2AX-Core handshake lifecycle](assets/handshake-lifecycle.svg)
 
 *SVG above displays on all devices; Mermaid below renders on desktop/GitHub web.*
 
@@ -93,6 +93,6 @@ Protocol defines interfaces; server provides implementations. No A2AX-specific i
 2. Build `protocol/` in isolation (`npm run build` in protocol).
 3. Replace server implementation: use your own Postgres, Redis, or different storage.
 4. Implement `RevocationProvider`, `AuditWriter`, `IssuerSigner` with your infrastructure.
-5. Deploy. The protocol verifies agents without any A2AX-operated services.
+5. Deploy. The protocol verifies agents without any A2AX-Core–operated services.
 
-The protocol compiles, runs tests, and verifies agents even if A2AX (the company) disappears.
+The protocol compiles, runs tests, and verifies agents even if Williams Creative (the original contributor) disappears.
